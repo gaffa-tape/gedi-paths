@@ -18,8 +18,8 @@ A convenience library for working with gedi paths.
 
     paths.append(path1, path2, ... pathN);
     // Adds paths together to form an unresolved path,
-    // eg, paths.append('[stuff]', '[/things]', '[..majigger]');
-    // would result in [stuff//things/..majigger], an unresolved, invalid path.
+    // eg, paths.append('[stuff]', '[/things]', '[../majigger]');
+    // would result in [stuff//things/../majigger], an unresolved, invalid path.
 
     paths.toParts(path);
     // Breaks a path into an array of path parts/keys.
@@ -29,5 +29,5 @@ A convenience library for working with gedi paths.
 
     paths.resolve(path1, path2, ... pathN);
     // Resolves an invalid path to a valid one,
-    // eg: paths.resolve('[stuff//things/..majigger]')
+    // eg: paths.resolve('[stuff//things/../majigger]')
     // would result in '[/majigger]'
