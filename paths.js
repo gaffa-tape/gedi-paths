@@ -183,6 +183,10 @@ function pathToParts(path){
 function appendPath(){
     var parts = pathToParts(arguments[0]);
 
+    if(!parts){
+        return;
+    }
+
     for (var argumentIndex = 1; argumentIndex < arguments.length; argumentIndex++) {
         var pathParts = pathToParts(arguments[argumentIndex]);
         for (var partIndex = 0; partIndex < pathParts.length; partIndex++) {
