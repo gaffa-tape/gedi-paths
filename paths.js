@@ -143,6 +143,11 @@ function pathToParts(path){
         return path;
     }
 
+    // if we haven't been passed a path, then turn the input into a path
+    if (! isPath(path)) {
+        path = createPath(path);
+    }
+
     path = path.slice(1,-1);
 
     var lastPartIndex = 0,
@@ -197,6 +202,12 @@ function appendPath(){
     return createPath(parts);
 }
 
+function isPath(path) {
+    return (typeof path == 'string' || (path instanceof String)) &&
+        path.charAt(0) == pathStart &&
+        path.charAt(path.length - 1) == pathEnd;
+}
+
 function isPathAbsolute(path){
     return pathToParts(path)[0] === rootPath;
 }
@@ -209,6 +220,7 @@ function isPathRoot(path){
 module.exports = {
     resolve: resolvePath,
     create: createPath,
+    is: isPath,
     isAbsolute: isPathAbsolute,
     isRoot: isPathRoot,
     append: appendPath,
