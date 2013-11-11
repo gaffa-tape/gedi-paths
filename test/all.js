@@ -87,6 +87,15 @@ test('append integer to path', function(t) {
     t.end();
 });
 
+test('append null returns original path', function(t) {
+    t.plan(1);
+    t.equal(
+        paths.append('[thing]', null),
+        '[thing]'
+    );
+    t.end();
+});
+
 test('resolve up a level', function(t) {
     var path = paths.resolve('[thing]', '[/stuff]', '[majigger]', '[..]');
 
