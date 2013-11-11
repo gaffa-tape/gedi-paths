@@ -194,7 +194,7 @@ function appendPath(){
 
     for (var argumentIndex = 1; argumentIndex < arguments.length; argumentIndex++) {
         var pathParts = pathToParts(arguments[argumentIndex]);
-        for (var partIndex = 0; partIndex < pathParts.length; partIndex++) {
+        for (var partIndex = 0; pathParts && partIndex < pathParts.length; partIndex++) {
                 parts.push(pathParts[partIndex]);
         }
     }
