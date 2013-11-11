@@ -1,6 +1,24 @@
 var test = require('tape'),
     paths = require('../paths');
 
+test('[/] is a path', function(t) {
+    t.plan(1);
+    t.ok(paths.is('[/]'), 'path is a path');
+    t.end();
+});
+
+test('/ is not a path', function(t) {
+    t.plan(1);
+    t.notOk(paths.is('/'), '/ is not a path');
+    t.end();
+});
+
+test('5 is not a path', function(t) {
+    t.plan(1);
+    t.notOk(paths.is(5), '5 is not a path');
+    t.end();
+});
+
 test('root', function(t) {
     var path = '[/]';
 
@@ -48,6 +66,33 @@ test('append', function(t) {
         '[thing/stuff]'
     );
 
+    t.end();
+});
+
+test('append non path string', function(t) {
+    t.plan(1);
+    t.equal(
+        paths.append('[thing]', 'stuff'),
+        '[thing/stuff]'
+    );
+    t.end();
+});
+
+test('append integer to path', function(t) {
+    t.plan(1);
+    t.equal(
+        paths.append('[thing]', 5),
+        '[thing/5]'
+    );
+    t.end();
+});
+
+test('append null returns original path', function(t) {
+    t.plan(1);
+    t.equal(
+        paths.append('[thing]', null),
+        '[thing]'
+    );
     t.end();
 });
 
