@@ -73,6 +73,9 @@ function resolvePath() {
                     }
                     lastRemoved = absoluteParts.pop();
                 }
+            } else if (pathPart.slice(-2) === upALevel) {
+                // deep bindings
+                absoluteParts.push(pathPart.slice(0, -2));
             } else {
                 // any following valid part? Add it to the absoluteParts.
                 absoluteParts.push(pathPart);
