@@ -1,31 +1,42 @@
 {
-    "name": "gedi-paths",
-    "description": "Gedi path functions",
-    "author": "Kory Nunn <knunn187@gmail.com>",
-    "version": "0.1.2",
-    "main": "paths.js",
-    "testling": {
-        "files": "test/all.js",
-        "browsers": {
-            "ie": [ 8, 9 ],
-            "firefox": [ 13 ],
-            "chrome": [ 20 ],
-            "safari": [ 5.1 ],
-            "opera": [ 12 ]
-        }
-    },
-    "devDependencies": {
-        "tape": "1.0.x"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/KoryNunn/gedi-paths.git"
-    },
-    "bugs": {
-        "url": "http://github.com/KoryNunn/gedi-paths/issues"
-    },
-    "scripts": {
-        "test": "./node_modules/.bin/tape test/all.js"
-    },
-    "contributors": []
+  "name": "gedi-paths",
+  "description": "Gedi path functions",
+  "author": "Kory Nunn <knunn187@gmail.com>",
+  "version": "0.2.0",
+  "main": "paths.js",
+  "testling": {
+    "files": "test/all.js",
+    "browsers": {
+      "ie": [
+        8,
+        9
+      ],
+      "firefox": [
+        13
+      ],
+      "chrome": [
+        20
+      ],
+      "safari": [
+        5.1
+      ],
+      "opera": [
+        12
+      ]
+    }
+  },
+  "devDependencies": {
+    "tape": "1.0.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/KoryNunn/gedi-paths.git"
+  },
+  "bugs": {
+    "url": "http://github.com/KoryNunn/gedi-paths/issues"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/tape test/all.js"
+  },
+  "contributors": []
 }
