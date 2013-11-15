@@ -49,9 +49,7 @@ function resolvePath() {
         for(var pathPartIndex = 0; pathPartIndex < pathParts.length; pathPartIndex++){
             pathPart = pathParts[pathPartIndex];
 
-            if(pathParts.length === 0){
-                // Empty path, maintain parent path.
-            } else if (pathPart === currentKey) {
+            if (pathPart === currentKey) {
                 // Has a last removed? Add it back on.
                 if(lastRemoved != null){
                     absoluteParts.push(lastRemoved);
@@ -147,7 +145,7 @@ function pathToParts(path){
     }
 
     // if we haven't been passed a path, then turn the input into a path
-    if (! isPath(path)) {
+    if (!isPath(path)) {
         path = createPath(path);
     }
 
@@ -220,12 +218,19 @@ function isPathRoot(path){
     return (isPathAbsolute(parts) && parts[0] === parts[1]) || parts.length === 0;
 }
 
+function isbubbleCapturePath(path){
+    var parts = pathToParts(path),
+        lastPart = parts[parts.length-1];
+    return lastPart && lastPart.slice(-2) === upALevel;
+}
+
 module.exports = {
     resolve: resolvePath,
     create: createPath,
     is: isPath,
     isAbsolute: isPathAbsolute,
     isRoot: isPathRoot,
+    isBubbleCapture: isbubbleCapturePath,
     append: appendPath,
     toParts: pathToParts,
     createRoot: createRootPath,
