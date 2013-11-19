@@ -2,6 +2,7 @@ var detectPath = require('./detectPath');
 
 var pathSeparator = "/",
     upALevel = "..",
+    bubbleCapture = "...",
     currentKey = "#",
     rootPath = "",
     pathStart = "[",
@@ -71,9 +72,9 @@ function resolvePath() {
                     }
                     lastRemoved = absoluteParts.pop();
                 }
-            } else if (pathPart.slice(-2) === upALevel) {
+            } else if (pathPart.slice(-bubbleCapture.length) === bubbleCapture) {
                 // deep bindings
-                absoluteParts.push(pathPart.slice(0, -2));
+                absoluteParts.push(pathPart.slice(0, -bubbleCapture.length));
             } else {
                 // any following valid part? Add it to the absoluteParts.
                 absoluteParts.push(pathPart);
@@ -218,10 +219,10 @@ function isPathRoot(path){
     return (isPathAbsolute(parts) && parts[0] === parts[1]) || parts.length === 0;
 }
 
-function isbubbleCapturePath(path){
+function isBubbleCapturePath(path){
     var parts = pathToParts(path),
         lastPart = parts[parts.length-1];
-    return lastPart && lastPart.slice(-2) === upALevel;
+    return lastPart && lastPart.slice(-bubbleCapture.length) === bubbleCapture;
 }
 
 module.exports = {
@@ -230,7 +231,7 @@ module.exports = {
     is: isPath,
     isAbsolute: isPathAbsolute,
     isRoot: isPathRoot,
-    isBubbleCapture: isbubbleCapturePath,
+    isBubbleCapture: isBubbleCapturePath,
     append: appendPath,
     toParts: pathToParts,
     createRoot: createRootPath,
