@@ -60,6 +60,9 @@ function resolvePath() {
                 // Root path? Reset parts to be absolute.
                 absoluteParts = [''];
 
+            } else if (pathPart.slice(-bubbleCapture.length) === bubbleCapture) {
+                // deep bindings
+                absoluteParts.push(pathPart.slice(0, -bubbleCapture.length));
             } else if (pathPart === upALevel) {
                 // Up a level? Remove the last item in absoluteParts
                 lastRemoved = absoluteParts.pop();
@@ -72,9 +75,6 @@ function resolvePath() {
                     }
                     lastRemoved = absoluteParts.pop();
                 }
-            } else if (pathPart.slice(-bubbleCapture.length) === bubbleCapture) {
-                // deep bindings
-                absoluteParts.push(pathPart.slice(0, -bubbleCapture.length));
             } else {
                 // any following valid part? Add it to the absoluteParts.
                 absoluteParts.push(pathPart);

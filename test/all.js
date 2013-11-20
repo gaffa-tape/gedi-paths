@@ -136,13 +136,26 @@ test('resolve up to key, then down a step', function(t) {
 });
 
 test('bubble capturing path', function(t) {
-    var path = paths.resolve('[thing/stuff..]');
+    var path = paths.resolve('[thing/stuff...]');
 
     t.plan(1);
 
     t.equal(
         path,
         '[thing/stuff]'
+    );
+
+    t.end();
+});
+
+test('bubble capturing root path', function(t) {
+    var path = paths.resolve('[...]');
+
+    t.plan(1);
+
+    t.equal(
+        path,
+        '[]'
     );
 
     t.end();
