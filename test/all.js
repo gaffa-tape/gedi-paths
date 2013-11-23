@@ -1,4 +1,4 @@
-var test = require('tape'),
+var test = require('grape'),
     paths = require('../paths');
 
 test('[/] is a path', function(t) {
@@ -135,6 +135,19 @@ test('resolve up to key, then down a step', function(t) {
     t.end();
 });
 
+test('resolve root path', function(t) {
+    var path = paths.resolve('[/]','[/]');
+
+    t.plan(1);
+
+    t.equal(
+        path,
+        '[/]'
+    );
+
+    t.end();
+});
+
 test('resolve double root path', function(t) {
     var path = paths.resolve('[/]','[/]');
 
@@ -168,7 +181,7 @@ test('bubble capturing root path', function(t) {
 
     t.equal(
         path,
-        '[]'
+        '[/]'
     );
 
     t.end();

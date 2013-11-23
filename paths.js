@@ -129,6 +129,9 @@ function createPath(path){
             }
             parts.push(pathPart);
         }
+        if(parts.length === 1 && parts[0] === rootPath){
+            return createRootPath();
+        }
         return rawToPath(parts.join(pathSeparator));
     }
 }
