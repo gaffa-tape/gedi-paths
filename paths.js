@@ -197,11 +197,14 @@ function appendPath(){
         return;
     }
 
+    if(isPathRoot(arguments[0])){
+        parts.pop();
+    }
+
     for (var argumentIndex = 1; argumentIndex < arguments.length; argumentIndex++) {
         var pathParts = pathToParts(arguments[argumentIndex]);
-        for (var partIndex = 0; pathParts && partIndex < pathParts.length; partIndex++) {
-                parts.push(pathParts[partIndex]);
-        }
+
+        pathParts && parts.push.apply(parts, pathParts);
     }
 
     return createPath(parts);
