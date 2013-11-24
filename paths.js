@@ -62,7 +62,9 @@ function resolvePath() {
 
             } else if (pathPart.slice(-bubbleCapture.length) === bubbleCapture) {
                 // deep bindings
-                absoluteParts.push(pathPart.slice(0, -bubbleCapture.length));
+                if(pathPart !== bubbleCapture){
+                    absoluteParts.push(pathPart.slice(0, -bubbleCapture.length));
+                }
             } else if (pathPart === upALevel) {
                 // Up a level? Remove the last item in absoluteParts
                 lastRemoved = absoluteParts.pop();

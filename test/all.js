@@ -180,12 +180,23 @@ test('bubble capturing path', function(t) {
 });
 
 test('bubble capturing root path', function(t) {
-    var path = paths.resolve('[...]');
+    var path = paths.resolve('[/...]');
 
     t.plan(1);
 
     t.equal(
         path,
         '[/]'
+    );
+});
+
+test('bubble capturing path with bubble capture as only child key', function(t) {
+    var path = paths.resolve('[/a]', '[...]');
+
+    t.plan(1);
+
+    t.equal(
+        path,
+        '[/a]'
     );
 });
