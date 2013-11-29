@@ -2,7 +2,7 @@
   "name": "gedi-paths",
   "description": "Gedi path functions",
   "author": "Kory Nunn <knunn187@gmail.com>",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "main": "paths.js",
   "testling": {
     "files": "test/all.js",
