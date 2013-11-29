@@ -25,11 +25,17 @@ function rawToPath(rawPath) {
 
 var memoisePathCache = {};
 function resolvePath() {
-    var memoiseKey = '';
+    var memoiseKey,
+        pathParts = [];
 
-    for(var argumentIndex = 0; argumentIndex < arguments.length; argumentIndex++){
-        memoiseKey += arguments[argumentIndex];
+    for(var argumentIndex = arguments.length; argumentIndex--;){
+        pathParts.unshift.apply(pathParts, pathToParts(arguments[argumentIndex]));
+        if(isPathAbsolute(arguments[argumentIndex])){
+            break;
+        }
     }
+
+    memoiseKey = pathParts.join('');
 
     if(memoisePathCache[memoiseKey]){
         return memoisePathCache[memoiseKey];
@@ -40,47 +46,39 @@ function resolvePath() {
         pathParts,
         pathPart;
 
-    for(var argumentIndex = 0; argumentIndex < arguments.length; argumentIndex++){
-        pathParts = pathToParts(arguments[argumentIndex]);
+    for(var pathPartIndex = 0; pathPartIndex < pathParts.length; pathPartIndex++){
+        pathPart = pathParts[pathPartIndex];
 
-        if(!pathParts || !pathParts.length){
-            continue;
-        }
-
-        for(var pathPartIndex = 0; pathPartIndex < pathParts.length; pathPartIndex++){
-            pathPart = pathParts[pathPartIndex];
-
-            if (pathPart === currentKey) {
-                // Has a last removed? Add it back on.
-                if(lastRemoved != null){
-                    absoluteParts.push(lastRemoved);
-                    lastRemoved = null;
-                }
-            } else if (pathPart === rootPath) {
-                // Root path? Reset parts to be absolute.
-                absoluteParts = [''];
-
-            } else if (pathPart.slice(-bubbleCapture.length) === bubbleCapture) {
-                // deep bindings
-                if(pathPart !== bubbleCapture){
-                    absoluteParts.push(pathPart.slice(0, -bubbleCapture.length));
-                }
-            } else if (pathPart === upALevel) {
-                // Up a level? Remove the last item in absoluteParts
-                lastRemoved = absoluteParts.pop();
-            } else if (pathPart.slice(0,2) === upALevel) {
-                var argument = pathPart.slice(2);
-                //named
-                while(absoluteParts.slice(-1).pop() !== argument){
-                    if(absoluteParts.length === 0){
-                        throw "Named path part was not found: '" + pathPart + "', in path: '" + arguments[argumentIndex] + "'.";
-                    }
-                    lastRemoved = absoluteParts.pop();
-                }
-            } else {
-                // any following valid part? Add it to the absoluteParts.
-                absoluteParts.push(pathPart);
+        if (pathPart === currentKey) {
+            // Has a last removed? Add it back on.
+            if(lastRemoved != null){
+                absoluteParts.push(lastRemoved);
+                lastRemoved = null;
             }
+        } else if (pathPart === rootPath) {
+            // Root path? Reset parts to be absolute.
+            absoluteParts = [''];
+
+        } else if (pathPart.slice(-bubbleCapture.length) === bubbleCapture) {
+            // deep bindings
+            if(pathPart !== bubbleCapture){
+                absoluteParts.push(pathPart.slice(0, -bubbleCapture.length));
+            }
+        } else if (pathPart === upALevel) {
+            // Up a level? Remove the last item in absoluteParts
+            lastRemoved = absoluteParts.pop();
+        } else if (pathPart.slice(0,2) === upALevel) {
+            var argument = pathPart.slice(2);
+            //named
+            while(absoluteParts[absoluteParts.length - 1] !== argument){
+                if(absoluteParts.length === 0){
+                    throw "Named path part was not found: '" + pathPart + "', in path: '" + arguments[argumentIndex] + "'.";
+                }
+                lastRemoved = absoluteParts.pop();
+            }
+        } else {
+            // any following valid part? Add it to the absoluteParts.
+            absoluteParts.push(pathPart);
         }
     }
 
