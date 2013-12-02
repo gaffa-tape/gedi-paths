@@ -141,11 +141,13 @@ function createRootPath(){
 }
 
 function pathToParts(path){
-    if(!path && typeof path !== 'string'){
+    var pathType = typeof path;
+
+    if(pathType !== 'string' && pathType !== 'number'){
+        if(Array.isArray(path)){
+            return path;
+        }
         return;
-    }
-    if(Array.isArray(path)){
-        return path;
     }
 
     // if we haven't been passed a path, then turn the input into a path

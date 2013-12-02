@@ -208,7 +208,7 @@ test('bubble capturing path with bubble capture as only child key', function(t) 
     );
 });
 
-test('to parts', function(t) {
+test('to parts valid path', function(t) {
     var path = '[a/b/c]'
 
     t.plan(1);
@@ -219,7 +219,7 @@ test('to parts', function(t) {
     );
 });
 
-test('to parts', function(t) {
+test('to parts valid key', function(t) {
     var path = 'a';
 
     t.plan(1);
@@ -230,7 +230,7 @@ test('to parts', function(t) {
     );
 });
 
-test('to parts', function(t) {
+test('to parts invalid key', function(t) {
     var path = 'a[b]';
 
     t.plan(1);
@@ -238,5 +238,27 @@ test('to parts', function(t) {
     t.notOk(
         paths.toParts(path),
         'no valid path'
+    );
+});
+
+test('to parts boolean', function(t) {
+    var path = true;
+
+    t.plan(1);
+
+    t.notOk(
+        paths.toParts(path),
+        'true is not a path'
+    );
+});
+
+test('to parts boolean', function(t) {
+    var path = false;
+
+    t.plan(1);
+
+    t.notOk(
+        paths.toParts(path),
+        'false is not a path'
     );
 });
