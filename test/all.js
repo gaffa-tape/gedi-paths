@@ -207,3 +207,36 @@ test('bubble capturing path with bubble capture as only child key', function(t) 
         '[/a]'
     );
 });
+
+test('to parts', function(t) {
+    var path = '[a/b/c]'
+
+    t.plan(1);
+
+    t.deepEqual(
+        paths.toParts(path),
+        ['a','b','c']
+    );
+});
+
+test('to parts', function(t) {
+    var path = 'a';
+
+    t.plan(1);
+
+    t.deepEqual(
+        paths.toParts(path),
+        ['a']
+    );
+});
+
+test('to parts', function(t) {
+    var path = 'a[b]';
+
+    t.plan(1);
+
+    t.notOk(
+        paths.toParts(path),
+        'no valid path'
+    );
+});

@@ -151,6 +151,9 @@ function pathToParts(path){
     // if we haven't been passed a path, then turn the input into a path
     if (!isPath(path)) {
         path = createPath(path);
+        if(path === false){
+            return;
+        }
     }
 
     path = path.slice(1,-1);
