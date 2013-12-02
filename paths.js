@@ -141,7 +141,7 @@ function createRootPath(){
 }
 
 function pathToParts(path){
-    if(!path){
+    if(path == null){
         return;
     }
     if(Array.isArray(path)){
