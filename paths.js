@@ -217,10 +217,16 @@ function isPath(path) {
 }
 
 function isPathAbsolute(path){
+    if(path == null){
+        return false;
+    }
     return pathToParts(path)[0] === rootPath;
 }
 
 function isPathRoot(path){
+    if(path == null){
+        return false;
+    }
     var parts = pathToParts(path);
     return (isPathAbsolute(parts) && parts[0] === parts[1]) || parts.length === 0;
 }

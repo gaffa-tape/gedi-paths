@@ -37,6 +37,13 @@ test('relative path', function(t) {
     t.notOk(paths.isAbsolute(path), 'path is not absolute');
 });
 
+test('is absolute on undefined', function(t) {
+    var path = '[/majigger]';
+
+    t.plan(1);
+    t.notOk(paths.isAbsolute(undefined), 'path is not absolute');
+});
+
 test('create', function(t) {
     var path = paths.create('thing');
 
