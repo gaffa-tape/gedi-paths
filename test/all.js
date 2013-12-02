@@ -175,6 +175,16 @@ test('resolve root and non-path', function(t) {
     );
 });
 
+// This is due to a previous memoisation bug.
+test('resolve non-root then root', function(t) {
+    var path1 = paths.resolve('[a]'),
+        path2 = paths.resolve('[/]','[a]');
+
+    t.plan(1);
+
+    t.equal(path2,'[/a]');
+});
+
 test('bubble capturing path', function(t) {
     var path = paths.resolve('[thing/stuff...]');
 

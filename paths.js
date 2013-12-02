@@ -35,7 +35,7 @@ function resolvePath() {
         }
     }
 
-    memoiseKey = pathParts.join('');
+    memoiseKey = pathParts.join(',');
 
     if(memoisePathCache[memoiseKey]){
         return memoisePathCache[memoiseKey];
