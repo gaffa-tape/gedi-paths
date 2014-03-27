@@ -6,9 +6,19 @@ test('[/] is a path', function(t) {
     t.ok(paths.is('[/]'), 'path is a path');
 });
 
+test('[/\]\[] is a path', function(t) {
+    t.plan(1);
+    t.ok(paths.is('[/\\]\\[]'), 'path is a path');
+});
+
 test('/ is not a path', function(t) {
     t.plan(1);
     t.notOk(paths.is('/'), '/ is not a path');
+});
+
+test('"[a] [b]" is not a path', function(t) {
+    t.plan(1);
+    t.notOk(paths.is('[a] [b]'), '"[a] [b]" is not a path');
 });
 
 test('5 is not a path', function(t) {

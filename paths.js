@@ -216,9 +216,13 @@ function appendPath(){
 }
 
 function isPath(path) {
-    return (typeof path == 'string' || (path instanceof String)) &&
-        path.charAt(0) == pathStart &&
-        path.charAt(path.length - 1) == pathEnd;
+    if(!(typeof path === 'string' || (path instanceof String))){
+        return;
+    }
+    var match = path.match(/\[.*?(?:\\\])*(?:\\\[)*\]/g);
+    if(match && match.length === 1 && match[0] === path){
+        return true;
+    }
 }
 
 function isPathAbsolute(path){
