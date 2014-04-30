@@ -65,6 +65,17 @@ test('create', function(t) {
     );
 });
 
+test('create with escapes', function(t) {
+    var path = paths.create(['[']);
+
+    t.plan(1);
+
+    t.equal(
+        path,
+        '[\\[]'
+    );
+});
+
 test('append', function(t) {
     var path = paths.append('[thing]', '[stuff]');
 

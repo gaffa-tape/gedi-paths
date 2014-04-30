@@ -124,9 +124,7 @@ function createPath(path){
         var parts = [];
         for (var i = 0; i < path.length; i++) {
             var pathPart = path[i];
-            if(pathPart.indexOf('\\') >= 0){
-                pathPart = pathPart.replace(/([\[|\]|\\|\/])/g, '\\$1');
-            }
+            pathPart = pathPart.replace(/([\[|\]|\\|\/])/g, '\\$1');
             parts.push(pathPart);
         }
         if(parts.length === 1 && parts[0] === rootPath){
