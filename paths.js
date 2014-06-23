@@ -158,15 +158,16 @@ function pathToParts(path){
 
     path = path.slice(1,-1);
 
+    if(path === ""){
+        return [];
+    }
+
     var lastPartIndex = 0,
         parts,
         nextChar,
         currentChar;
 
     if(path.indexOf('\\') < 0){
-        if(path === ""){
-            return [];
-        }
         return path.split(pathSeparator);
     }
 
