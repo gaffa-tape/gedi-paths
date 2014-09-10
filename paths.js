@@ -29,7 +29,10 @@ function resolvePath() {
         pathParts = [];
 
     for(var argumentIndex = arguments.length; argumentIndex--;){
-        pathParts.unshift.apply(pathParts, pathToParts(arguments[argumentIndex]));
+        var parts = pathToParts(arguments[argumentIndex]);
+        if(parts){
+            pathParts.unshift.apply(pathParts, parts);
+        }
         if(isPathAbsolute(arguments[argumentIndex])){
             break;
         }
