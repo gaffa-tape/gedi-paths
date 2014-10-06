@@ -221,10 +221,7 @@ function isPath(path) {
     if(!(typeof path === 'string' || (path instanceof String))){
         return;
     }
-    var match = path.match(/\[.*?(?:\\\])*(?:\\\[)*\]/g);
-    if(match && match.length === 1 && match[0] === path){
-        return true;
-    }
+    return !!path.match(/^\[(?:[^\[\]]|\\.)*\]$/);
 }
 
 function isPathAbsolute(path){
