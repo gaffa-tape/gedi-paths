@@ -141,6 +141,7 @@ function createRootPath(){
     return createPath([rootPath, rootPath]);
 }
 
+var pathCache = {};
 function pathToParts(path){
     var pathType = typeof path;
 
@@ -165,13 +166,18 @@ function pathToParts(path){
         return [];
     }
 
+    if(pathCache[path]){
+        return pathCache[path].slice();
+    }
+
     var lastPartIndex = 0,
         parts,
         nextChar,
         currentChar;
 
     if(path.indexOf('\\') < 0){
-        return path.split(pathSeparator);
+        pathCache[path] = path.split(pathSeparator);
+        return pathCache[path].slice();
     }
 
     parts = [];
@@ -193,6 +199,8 @@ function pathToParts(path){
         }
     }
     parts.push(path.slice(lastPartIndex));
+
+    pathCache[path] = parts.slice();
 
     return parts;
 }
